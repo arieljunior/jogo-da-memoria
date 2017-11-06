@@ -4,4 +4,4 @@ jogo ainda em desenvolvimento. Testado nos navegadores:
  - Chrome
  - Firefox
  
- Tecnologia utilizadas por enquanto: Jquery e Bootstrap
+ Tecnologias utilizadas até o momento: Jquery 3.1.0 e Bootstrap 3.3.7
