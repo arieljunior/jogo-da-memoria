@@ -116,7 +116,7 @@ function testarCarta(obj)
 
         }
         //TESTAR SE O JOGO TERMINOU
-        if (acertos == 1)
+        if (acertos == 8)
         {
           pararCronometro();
           $('#stop_game').addClass('disabled');
