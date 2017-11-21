@@ -19,13 +19,30 @@
   </head>
   <body>
     <div class="container">
-      <!-- <form method="GET" action="jogo.html" onsubmit="salvarJogador()"> -->
-        <div class="form-group formulario">
-          <label for="nome">Nome:</label>
-          <input type="text" class="form-control" id="nome-form" aria-describedby="nomeJogador" placeholder="Digite seu nome">
+      <button type="button" class="btn btn-default" id="selecionar-jogador">Selecionar jogador</button>
+      <button type="button" class="btn btn-default" id="criar-jogador">Criar jogador</button>
+
+      <div class="select-player">
+        <div class="front">
+          <h1>selecione um jogador</h1>
+
+          <form class="form" >
+            <select id="lista-jogadores">
+            </select>
+            <button type="submit" name="button" class="btn">jogar</button>
+          </form>
         </div>
-        <input type="button" value="Jogar" onclick="salvarJogador()" class="btn btn-primary">
-      <!-- </form> -->
+        <div class="back">
+          <h1>crie um jogador</h1>
+          <!-- <form method="GET" action="jogo.html" onsubmit="salvarJogador()"> -->
+            <div class="form-group formulario">
+              <label for="nome">Nome:</label>
+              <input type="text" class="form-control" id="nome-form" aria-describedby="nomeJogador" placeholder="Digite seu nome">
+            </div>
+            <input type="button" value="Jogar" onclick="salvarJogador()" class="btn btn-primary">
+          <!-- </form> -->
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -34,17 +34,24 @@ function montarTabuleiro()
 
     for (var i = 0; i < cartas.length; i++)
     {
-      $('#tabuleiro').append('<div id="'+cartas[i]+'" class="carta"></div>');
-      $('#'+cartas[i]).css({'background-image': 'url("./img/carta_costas.png")','transition': '1.5s'});
+      $('#tabuleiro').append('<div class="card" id="'+cartas[i]+'"><div class="front"><div class="carta-costas"></div></div><div class="back"><div id="carta'+cartas[i]+'" class="carta"></div></div></div>');
+      $('#carta'+cartas[i]).css({'background-image': 'url("./img/'+cartas[i]+'.png")','transition': '1.5s'});
       if (i == 3 || i == 7 || i == 11 || i == 15)
       {
         $('#tabuleiro').append('<br class="linha">');
       }
     }
-    setTimeout(function()
-    {
-      $(".carta").css({'background-image': 'url("./img/carta_costas.png")'});
-    },2000);
+
+    $(".card").flip({
+      axis: 'y',
+      trigger: 'manual',
+      reverse: true
+    });
+
+    // setTimeout(function()
+    // {
+    //   $(".carta").css({'background-image': 'url("./img/carta_costas.png")'});
+    // },2000);
 }
 
 function embaralhar(array)
@@ -63,12 +70,12 @@ function embaralhar(array)
 
 function virarCarta(carta_id)
 {
-  $('#'+carta_id).css({'background-image': 'url("./img/'+carta_id+'.png")','transition': '1.5s'});
+  $("#"+carta_id).flip(true);
 }
 
 function esconderCarta(carta_id)
 {
-  $('#'+carta_id).css({'background-image': 'url("./img/carta_costas.png")','transition': '1s'});
+  $("#"+carta_id).flip(false);
 }
 
 function testarCarta(obj)
@@ -77,64 +84,53 @@ function testarCarta(obj)
     if (carta1_selecionada == null)
     {
       carta1_selecionada = obj.id;
-      $('#'+carta1_selecionada).unbind('click');
+      $('#'+carta1_selecionada).unbind('click'); //Desabilita o click
       virarCarta(carta1_selecionada);
     }
     else
     {
-      //Primeira carta já está exibida
       //Código para exibir a segunda carta
       carta2_selecionada = obj.id;
       virarCarta(carta2_selecionada);
 
-      $('.carta').unbind('click'); //Desabilita o click das cartas
+      $('.card').unbind('click'); //Desabilita o click de todas as cartas
 
       setTimeout(function(){ //função para o codigo abaixo ser executado depois de um tempo
 
-        //Uso o id da carta como posição do vetor "vetor_para_verificar_ponto" que está ordenado com os valores de 1 a 8 e cada valor se repete
+        //Uso o id da carta como index do vetor (vetor_para_verificar_ponto) para identificar se os valores são iguais
+        //OBS.: o vetor tem 16 posições e os valores se repetem a partir da 7 posição
         if (vetor_para_verificar_ponto[carta1_selecionada] === vetor_para_verificar_ponto[carta2_selecionada])
         {
           acertos += 1;
-          $('#'+carta1_selecionada).removeClass('carta').addClass('pontuada');
-          $('#'+carta2_selecionada).removeClass('carta').addClass('pontuada');
+          $('#'+carta1_selecionada).addClass('pontuada');
+          $('#'+carta2_selecionada).addClass('pontuada');
 
           carta1_selecionada = null;
           carta2_selecionada = null;
-          $('.carta').click(function(){ //Devolver o click das cartas
+          $('.card').click(function(){ //Devolver o click das cartas
             testarCarta(this);
           });
 
-        }else
+        }
+        else
         {
           esconderCarta(carta1_selecionada);
           esconderCarta(carta2_selecionada);
           carta1_selecionada = null;
           carta2_selecionada = null;
-          $('.carta').click(function(){
+          $('.card').click(function(){
             testarCarta(this);
           });
 
         }
+
         //TESTAR SE O JOGO TERMINOU
         if (acertos == 8)
         {
           pararCronometro();
           $('#stop_game').addClass('disabled');
-          // tempo_de_jogo = minutos+segundos;
 
-          $('.carta').unbind('click');
-
-          if (centessimo_total < localStorage.getItem('centessimo') || localStorage.getItem('centessimo') == null)
-          {
-              alert('Novo record. Parabéns!!! Seu tempo foi'+'\nMinutos: '+minutos+'\nSegundos: '+segundos);
-              // localStorage.setItem('menor_tempo', minutos+'m'+segundos);
-              localStorage.setItem('centessimo', centessimo_total);
-              // location.reload(true);
-          }
-          else
-          {
-              alert('Jogo terminado. Seu tempo foi'+'\nMinutos: '+minutos+'\nSegundos: '+segundos);
-          }
+          $('.card').unbind('click');
 
           for (var i = 0; i < jogadores.length; i++)
           {
@@ -145,28 +141,30 @@ function testarCarta(obj)
             }
           }
 
+          if (centessimo_total < localStorage.getItem('centessimo') || localStorage.getItem('centessimo') == null)
+          {
+              alert('Novo record. Parabéns!!! Seu tempo foi'+'\nMinutos: '+minutos+'\nSegundos: '+segundos);
+              localStorage.setItem('centessimo', centessimo_total);
+              location.reload(true);
+          }
+          else
+          {
+              alert('Jogo terminado. Seu tempo foi'+'\nMinutos: '+minutos+'\nSegundos: '+segundos);
+              location.reload(true);
+          }
+
+
+
         }
       },1000);
     }
 }
 
-function verificarLocalStorage()
-{
-  if (localStorage.getItem('menor_tempo')==null)
-  {
-    return '...';
-  }
-  else
-  {
-    return localStorage.getItem('menor_tempo');
-  }
-};
-
 function reiniciarJogo()
 {
   reiniciarCronometro();
   $('.linha').remove();
-  $('.carta').remove();
+  $('.card').remove();
   $('.pontuada').remove();
   acertos = 0;
   carta1_selecionada = null;
@@ -179,10 +177,12 @@ function comecarJogo()
 
     setTimeout(function()
     {
-      $('.carta').click(function()
+
+      $('.card').click(function()
       {
         testarCarta(this);
       });
+
       ativarCronometro();
       control_click_stop_game = true;
       control_click_start_game = true;
@@ -193,20 +193,9 @@ function comecarJogo()
 $(function()
 {
   montarTabelaRank();
-  // var topPontuacao = document.getElementById('menor_tempo');
-  // topPontuacao.innerText = 'Menor tempo: '+verificarLocalStorage();
 
-// Habilita o efeito de virar tela do formulario
-// $("#view-toggle").flip(true);
 
-  // $(".carta").flip({
-  //   axis: 'y',
-  //   trigger: 'manual',
-  //   reverse: true
-  // });
-
-  var tagPlayer = document.getElementById('player');
-  tagPlayer.innerText = jogador;
+  $('#player').text(jogador);
 
 
 
@@ -232,11 +221,10 @@ $(function()
   $('#stop_game').click(function(){
     if (control_click_stop_game)
     {
-      $('.carta').unbind('click');
+      $('.card').unbind('click');
       $('#icon-play').removeClass('glyphicon-repeat').addClass('glyphicon-play');
       $('#stop_game').addClass('disabled');
       pararCronometro();
-      $('.carta').unbind('click');
       isGameRestart = true;
     }
   });

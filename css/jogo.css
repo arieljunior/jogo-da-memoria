@@ -4,11 +4,14 @@ body{
   background-image: url('../img/background-azul.png');
   /*background-color: #ffa64d;*/
 }
-.carta, .pontuada{
+.carta, .pontuada, .carta-costas, .card{
   width: 150px;
   height: 130px;
   display: inline-block;
   margin-right: 5px;
+}
+.carta-costas{
+  background-image: url('../img/carta_costas.png');
 }
 .pontuada{
   opacity: 0.5;

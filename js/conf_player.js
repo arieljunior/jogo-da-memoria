@@ -1,3 +1,5 @@
+var jogadores = JSON.parse(localStorage.getItem('jogadores'));
+
 if (localStorage.getItem('jogadores') == null) {
   var jogadores = '[]';
   localStorage.setItem('jogadores', jogadores);
@@ -5,7 +7,7 @@ if (localStorage.getItem('jogadores') == null) {
 
 function salvarJogador(){
   var jogador = document.getElementById('nome-form').value;
-  var jogadores = JSON.parse(localStorage.getItem('jogadores'));
+
   var isPlayerExist;
 
   if (!jogador == '') {
@@ -29,3 +31,28 @@ function salvarJogador(){
     alert('Informe o nome do jogador');
   }
 }
+
+$(function(){
+
+  $(".select-player").flip({
+    axis: 'x',
+    trigger: 'manual',
+    reverse: true
+  });
+
+
+  $('#selecionar-jogador').click(function (){
+    $(".select-player").flip(false);
+  });
+
+  $('#criar-jogador').click(function(){
+    $(".select-player").flip(true);
+  });
+
+  for (var i = 0; i < jogadores.length; i++) {
+    $('#lista-jogadores').append('<option value="'+jogadores[i]['nome']+'">'+jogadores[i]['nome']+'</option>')
+  }
+
+
+
+})
