@@ -15,14 +15,43 @@ function montarTabelaRank(){
    return tempo1.tempo > tempo2.tempo;
  }
 
+ function converterCentesimo(cent){
+   for (var i = 0; i <= cent; i++) {
+     if (i == 100) {
+
+     }
+   }
+ }
+
   jogadores.sort(porCentesimo);
 
   var cssLinha = 'odd';
   var posicao = 1;
   for (var i = 0; i < jogadores.length; i++) {
-    $('#dados-tabela').append('<tr class="'+cssLinha+'"> <td class="col-xs-1">'+posicao+'</td> <td class="col-xs-7">'+jogadores[i]['nome']+'</td> <td class="col-xs-1">'+jogadores[i]['tempo']+'</td></tr>');
+    var minutoRank = 0;
+    var segundoRank = 0;
+    var centessimoRank = 0;
+    for (var x = 0; x <= jogadores[i]['tempo'] ; x++) {
+      centessimoRank++
+      if (centessimoRank == 100) {
+        segundoRank++;
+        centessimoRank = 0;
+      }
+      if (segundoRank == 60) {
+        minutoRank++;
+        segundoRank = 0;
+      }
+    }
+    if (minutoRank > 0) {
+      $('#dados-tabela').append('<tr class="'+cssLinha+'"> <td class="col-xs-1">'+posicao+'</td> <td class="col-xs-7">'+jogadores[i]['nome']+'</td> <td class="col-xs-1">'+minutoRank+'m'+segundoRank+'s</td></tr>');
+    }else {
+      $('#dados-tabela').append('<tr class="'+cssLinha+'"> <td class="col-xs-1">'+posicao+'</td> <td class="col-xs-7">'+jogadores[i]['nome']+'</td> <td class="col-xs-1">'+segundoRank+'s</td></tr>');
+    }
+
     if (cssLinha == 'odd') {
       cssLinha = 'even';
+    }else {
+      cssLinha = 'odd';
     }
     posicao++;
   }
@@ -47,11 +76,6 @@ function montarTabuleiro()
       trigger: 'manual',
       reverse: true
     });
-
-    // setTimeout(function()
-    // {
-    //   $(".carta").css({'background-image': 'url("./img/carta_costas.png")'});
-    // },2000);
 }
 
 function embaralhar(array)
@@ -102,8 +126,10 @@ function testarCarta(obj)
         if (vetor_para_verificar_ponto[carta1_selecionada] === vetor_para_verificar_ponto[carta2_selecionada])
         {
           acertos += 1;
-          $('#'+carta1_selecionada).addClass('pontuada');
-          $('#'+carta2_selecionada).addClass('pontuada');
+          $('#'+carta1_selecionada).removeClass('card').addClass('pontuada');
+          $('#'+carta2_selecionada).removeClass('card').addClass('pontuada');
+
+          alterarStatus('Acertou', 1000, 'success');
 
           carta1_selecionada = null;
           carta2_selecionada = null;
@@ -114,6 +140,7 @@ function testarCarta(obj)
         }
         else
         {
+          alterarStatus('Errou', 1000, 'danger');
           esconderCarta(carta1_selecionada);
           esconderCarta(carta2_selecionada);
           carta1_selecionada = null;
@@ -143,17 +170,10 @@ function testarCarta(obj)
 
           if (centessimo_total < localStorage.getItem('centessimo') || localStorage.getItem('centessimo') == null)
           {
-              alert('Novo record. Parabéns!!! Seu tempo foi'+'\nMinutos: '+minutos+'\nSegundos: '+segundos);
-              localStorage.setItem('centessimo', centessimo_total);
-              location.reload(true);
+            localStorage.setItem('centessimo', centessimo_total);
           }
-          else
-          {
-              alert('Jogo terminado. Seu tempo foi'+'\nMinutos: '+minutos+'\nSegundos: '+segundos);
-              location.reload(true);
-          }
-
-
+          alert('Jogo finalizado. Seu tempo foi: '+minutos+'m '+segundos+'s');
+          location.reload(true);
 
         }
       },1000);
@@ -175,6 +195,7 @@ function comecarJogo()
 {
     montarTabuleiro();
 
+	alterarStatus('iniciando...', 2000, 'warning');
     setTimeout(function()
     {
 
@@ -187,7 +208,20 @@ function comecarJogo()
       control_click_stop_game = true;
       control_click_start_game = true;
       $('#stop_game').removeClass('disabled');
-    },3000);
+
+	  alterarStatus('Jogo iniciado', 1000, 'success');
+    },2000);
+}
+
+function alterarStatus(msg, tempo, novoTipo){
+
+	$('#status-game').addClass('alert-'+novoTipo);
+    $('#msg-status').text(msg);
+
+	setTimeout(function(){
+		$('#status-game').removeClass('alert-'+novoTipo);
+		$('#msg-status').text('...');
+	}, tempo);
 }
 
 $(function()
