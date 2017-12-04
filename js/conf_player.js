@@ -33,6 +33,8 @@ function salvarJogador(){
 }
 
 $(function(){
+  
+  alert('Jogo ainda em desenvolvimento!!!\nPara jogar: clique em "Criar Jogador", insira o nome e em seguida clique em "Jogar"\nAs vezes é necessário recarregar a página');
 
   $(".select-player").flip({
     axis: 'x',
