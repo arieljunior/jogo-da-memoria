@@ -1,6 +1,6 @@
 Jogo da memória em Front-end
 
-Link: https://arieljunior.github.io/memoria/
+Link: https://arieljunior.github.io/jogo-da-memoria/
 
 jogo ainda em desenvolvimento. Testado nos navegadores:
  - Chrome
