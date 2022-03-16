@@ -1,0 +1,62 @@
+body{
+  font-family: 'Exo', sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+header > div {
+  text-align: center;
+}
+
+.container-main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  margin: 20px;
+}
+
+.container-board {
+  padding: 20px 25px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table td, .table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.table tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+}
+
+.table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.board-game {
+  display: grid;
+  grid-template-columns: 0fr 0fr 0fr 0fr;
+  gap: 10px;
+  justify-content: center;
+}
+
+
+.card {
+  width: 150px;
+  height: 130px;
+}
+.card-back {
+  background-image: url('../img/carta_costas.png');
+}
