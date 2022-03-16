@@ -1,9 +1,6 @@
-Jogo da memória em Front-end
+- Jogo da memória em Javascript Puro -
 
-Link: https://arieljunior.github.io/jogo-da-memoria/
+Jogo em processo de refatoração (melhorias)
 
-jogo ainda em desenvolvimento. Testado nos navegadores:
- - Chrome
- - Firefox
- 
- Tecnologias utilizadas até o momento: Jquery 3.1.0 e Bootstrap 3.3.7
+Link antigo: https://arieljunior.github.io/jogo-da-memoria/
+Link novo: ...
