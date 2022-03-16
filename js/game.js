@@ -69,7 +69,7 @@ const handleMatchedCards = () => {
 }
 
 const hideCards = () => {
-  const urlImage = "url('./img/carta_costas.png')";
+  const urlImage = "url('./img/card-back.png')";
   firstCard.element.style.backgroundImage = urlImage;
   secondCard.element.style.backgroundImage = urlImage;
 }
