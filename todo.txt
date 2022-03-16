@@ -1,2 +1,0 @@
-- Desabilitar os clicks quando selecionar 2 cartas
-- Desabilitar botão iniciar jogo depois de iniciado
