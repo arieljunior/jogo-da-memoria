@@ -13,7 +13,7 @@
     <div>
       <h1>Jogo da Memória</h1>
     </div>
-    <!-- <div class="timer-container">
+    <div class="timer-container">
       <span class="timer" id="minutes">00</span>
       <span class="timer" id="seconds">:00</span>
     </div>
@@ -21,45 +21,19 @@
       <button type="button" id="btn-start-game" class="">
         Jogar
       </button>
-    </div> -->
+    </div>
   </header>
   <main class="container-main">
-    <!-- <section>
-      <h2>Histórico</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Finalizado em</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>04/03/2022 14:06</td>
-            <td>15 minutos</td>
-          </tr>
-        </tbody>
-      </table>
-    </section> -->
+    <section>
+      <ul>
+        <li>Pontuação: <span id="points">0</span></li>
+        <li>Acertos: <span id="hits">0</span></li>
+        <li>Erros: <span id="errors">0</span></li>
+      </ul>
+    </section>
 
     <section class="container-board">
-      <div class="board-game">
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
-        <div class="card card-back"></div>
+      <div class="board-game" id="board">
       </div>
     </section>
   </main>
