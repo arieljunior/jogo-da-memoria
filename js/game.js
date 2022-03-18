@@ -28,12 +28,14 @@ const handleClickCard = (element, index) => {
     secondCard = { element, index };
   }
 
-  element.style.backgroundImage = `url('./img/${index}.png')`;
+  showCard(element, index);
 
   if (firstCard && secondCard) {
     testCards();
   }
 };
+
+const showCard = (element, position) => element.style.backgroundImage = `url('./img/${position}.png')`;
 
 const isFinishGame = () => hits === cardsPosition.length / 2;
 
@@ -71,14 +73,18 @@ const testCards = () => {
 
 const updateBoard = (hideCards = false) => {
   if (hideCards) {
-    const urlImage = "url('./img/card-back.png')";
-    firstCard.element.style.backgroundImage = urlImage;
-    secondCard.element.style.backgroundImage = urlImage;
+    hideCard(firstCard.element)
+    hideCard(secondCard.element)
   } else {
     firstCard.element.style.opacity = "0.5";
     secondCard.element.style.opacity = "0.5";
   }
 };
+
+const hideCard = (element) => {
+  const urlImage = "url('./img/card-back.png')";
+  element.style.backgroundImage = urlImage
+}
 
 const updateInfo = () => {
   pointsElement.innerHTML = points;
@@ -97,12 +103,17 @@ const isMatchCards = () => {
   return indexesCompare[indexFirstCard] === indexesCompare[indexSecondCard];
 };
 
-const drawBoard = () => {
+const drawBoard = (show = false) => {
   boardGameElement.innerHTML = "";
-  cardsPosition.forEach(() => {
+  cardsPosition.forEach( position => {
     let divCard = document.createElement('div');
     divCard.classList.add("card");
     divCard.classList.add("card-back");
+
+    if(show){
+      showCard(divCard, position);
+    }
+
     boardGameElement.appendChild(divCard);
   })
 }
@@ -124,15 +135,20 @@ function startGame() {
   if(isFinishGame()){
     resetGame();
   }
+  
   shuffleCards();
-  drawBoard();
+  drawBoard(true);
 
   const cardsElement = document.querySelectorAll(".card");
 
+  setTimeout(() => {
+    cardsElement.forEach(element => hideCard(element));
+  }, 2500);
+
   cardsElement.forEach((cardElement, index) => {
-    cardElement.addEventListener("click", () =>
+    cardElement.addEventListener("click", () =>{
       handleClickCard(cardElement, cardsPosition[index])
-    );
+    });
   });
 }
 
