@@ -64,6 +64,7 @@ const testCards = () => {
 
     if (isFinishGame()) {
       buttonStartGameElement.disabled = false;
+      pauseTimer();
       return;
     }
 
@@ -127,6 +128,7 @@ const resetGame = () => {
   blockBoard = false;
   historyIndexsMatcheds = [];
   updateInfo();
+  resetTimer();
 }
 
 function startGame() {
@@ -143,6 +145,7 @@ function startGame() {
 
   setTimeout(() => {
     cardsElement.forEach(element => hideCard(element));
+    startTimer();
   }, 2500);
 
   cardsElement.forEach((cardElement, index) => {
