@@ -4,37 +4,35 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/index.css">
-  
+  <link href='https://fonts.googleapis.com/css?family=Chakra Petch' rel='stylesheet'>
   <title>Jogo da Memória</title>
 </head>
 
 <body>
   <header>
-    <div>
-      <span>Jogo</span>
-      <span>da</span>
-      <span>Memória</span>
+    <div class="logo">
+      <img src="./img/Logo.svg" class="logo" alt="logo" title="Jogo da memória"/>
     </div>
     <div class="timer-container">
-      <span class="timer" id="minute">00:</span>
-      <span class="timer" id="second">00:</span>
-      <span class="timer" id="millisecond">00</span>
-    </div>
-    <div>
-      <button type="button" id="btn-start-game" class="">
-        Jogar
-      </button>
+      <span class="timer" id="minute">00</span>
+      <span class="timer">:</span>
+      <span class="timer" id="second">00</span>
     </div>
   </header>
   <main class="container-main">
-    <section>
-      <ul>
-        <li>Pontuação: <span id="points">0</span></li>
-        <li>Acertos: <span id="hits">0</span></li>
-        <li>Erros: <span id="errors">0</span></li>
-      </ul>
+    <section class="">
+      <div>
+        <ul>
+          <li>Pontuação: <span id="points">0</span></li>
+          <li>Acertos: <span id="hits">0</span></li>
+          <li>Erros: <span id="errors">0</span></li>
+        </ul>
+      </div>
+      <div>
+        <button type="button" id="btn-start-game" class="btn">Iniciar Jogo</button>
+      </div>
     </section>
-
+    
     <section class="container-board">
       <div class="board-game" id="board">
       </div>

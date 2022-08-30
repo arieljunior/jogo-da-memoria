@@ -1,8 +1,10 @@
 const buttonStartGameElement = document.querySelector("#btn-start-game");
+// const buttonRestartGameElement = document.querySelector("#btn-restart-game");
 const boardGameElement = document.querySelector("#board");
 const pointsElement = document.querySelector("#points");
 const hitsElement = document.querySelector("#hits");
 const errorsElement = document.querySelector("#errors");
+// const infoElement = document.querySelector("#info");
 
 let historyIndexsMatcheds = [];
 const indexesCompare = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -18,9 +20,9 @@ const shuffleCards = () => {
 };
 
 const handleClickCard = (element, index) => {
-  if (historyIndexsMatcheds.indexOf(index) > -1) return;
-
   if (blockBoard) return;
+
+  if (historyIndexsMatcheds.indexOf(index) > -1) return;
 
   if (!firstCard) {
     firstCard = { element, index };
@@ -63,7 +65,7 @@ const testCards = () => {
     secondCard = null;
 
     if (isFinishGame()) {
-      buttonStartGameElement.disabled = false;
+      // buttonRestartGameElement.style.display = 'block';
       pauseTimer();
       return;
     }
@@ -132,9 +134,11 @@ const resetGame = () => {
 }
 
 function startGame() {
-  buttonStartGameElement.disabled = true;
+  // infoElement.style.display = 'block';
+  buttonStartGameElement.setAttribute('disabled', 'true');
 
   if(isFinishGame()){
+    // buttonRestartGameElement.style.display = 'none';
     resetGame();
   }
   

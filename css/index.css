@@ -1,62 +1,96 @@
-body{
-  font-family: 'Exo', sans-serif;
-  background-color: #f2f2f2;
-  margin: 0;
-  padding: 0;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+:root {
+	--main-color: #3d5a80;
+	--main-color-light: #98c1d9;
+	--secondary-color: #ee6c4d;
+	--secondary-color-hover: #b4563e;
+	--light-color: #e0fbfc;
+	--dark-color: #293241;
+}
+body {
+	font-family: "Chakra Petch";
+	color: var(--light-color);
+	background-color: var(--dark-color);
+	height: 100vh;
 }
 
-header > div {
-  text-align: center;
+button {
+	font-family: "Chakra Petch";
+}
+
+header {
+	background-color: var(--main-color);
+	display: grid;
+	grid-template-columns: auto 1fr;
+}
+
+.timer-container {
+	padding-top: 20px;
+	font-size: 50px;
+	gap: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+	margin: 0 auto;
+	width: 200px;
+}
+
+#millisecond {
+	font-size: 25px;
+	display: contents;
 }
 
 .container-main {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  margin: 20px;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	margin: 20px;
+	height: calc(100% - 100px);
+	background-color: var(--main-color);
+	border-radius: 5px;
+	padding: 20px;
+}
+
+.btn {
+	padding: 5px 10px;
+	font-size: 25px;
+	border-radius: 10px;
+	color: var(--light-color);
+	background-color: var(--secondary-color);
+	border-color: var(--light-color);
+	border-width: 1px;
+	border-style: solid;
+  cursor: pointer;
+}
+
+.btn:hover {
+	background-color: var(--secondary-color-hover);
+}
+
+.btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .container-board {
-  padding: 20px 25px;
-}
-
-.table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.table td, .table th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.table tr:nth-child(even){
-  background-color: #f2f2f2;
-}
-
-.table tr:hover {
-  background-color: #ddd;
-}
-
-.table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
+	padding: 20px 25px;
 }
 
 .board-game {
-  display: grid;
-  grid-template-columns: 0fr 0fr 0fr 0fr;
-  gap: 10px;
-  justify-content: center;
+	display: grid;
+	grid-template-columns: 0fr 0fr 0fr 0fr;
+	gap: 10px;
+	justify-content: center;
+	height: calc(100vh - 160px);
 }
-
 
 .card {
-  width: 150px;
-  height: 130px;
+	width: 150px;
+	height: 130px;
 }
 .card-back {
-  background-image: url('../img/card-back.png');
+	background-image: url("../img/card-back.png");
 }
